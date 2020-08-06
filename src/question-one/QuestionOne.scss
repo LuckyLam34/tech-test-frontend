@@ -1,0 +1,44 @@
+$blue: #1a8be7;
+$whiteText: #fff;
+$borderRadius: 0.25rem;
+
+section.search-results {
+  .results-table {
+    .record {
+      background-color: $blue;
+      color: $whiteText;
+      border-radius: $borderRadius;
+      border: 1px solid $blue;
+      margin-bottom: 0.2em;
+      display: flex;
+
+      .w-20 {
+        width: 20%;
+      }
+
+      .w-10 {
+        width: 10%;
+      }
+
+      .w-30 {
+        width: 30%;
+      }
+
+      .w-30,
+      .w-20,
+      .w-10 {
+        & > span {
+          display: none;
+        }
+      }
+    }
+
+    & > .record:last-child {
+      margin-bottom: 0;
+    }
+
+    .header {
+      font-weight: bold;
+    }
+  }
+}

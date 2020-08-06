@@ -1,12 +1,40 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import { SectionGroup } from "../components/section/SectionGroup";
-import { SectionPanel } from "../components/section/SectionPanel";
+import { SectionGroup } from '../components/section/SectionGroup';
+import { SectionPanel } from '../components/section/SectionPanel';
 
-import "./QuestionOne.css";
+import TopBarProgress from 'react-topbar-progress-indicator';
+
+import './QuestionOne.scss';
+
+const TableItem = ({ item, no }) => (
+  <div className="record p-3 align-items-center">
+    <div className="w-10">
+      <span className="font-weight-bold">#</span>
+      <div>{no}</div>
+    </div>
+    <div className="w-30 text-capitalize">
+      <span className="font-weight-bold">Name</span>
+      <div>{item.name}</div>
+    </div>
+    <div className="w-20">
+      <span className="font-weight-bold">Start Date</span>
+      <div>{new Date(item.start).toLocaleDateString()}</div>
+    </div>
+    <div className="w-20">
+      <span className="font-weight-bold">End Date</span>
+      <div>{new Date(item.end).toLocaleDateString()}</div>
+    </div>
+    <div className="w-20">
+      <span className="font-weight-bold">Contact</span>
+      <div>{item.contact.name}</div>
+    </div>
+  </div>
+);
 
 export const QuestionOne = ({ service }) => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const search = (keyword) => {
     if (!keyword) {
@@ -16,9 +44,14 @@ export const QuestionOne = ({ service }) => {
     }
 
     if (keyword.length >= 3) {
-      service.getJobsWithSearchTerm(keyword).then((res) => {
-        setData(res);
-      });
+      setLoading(true);
+
+      service
+        .getJobsWithSearchTerm(keyword)
+        .then((res) => {
+          setData(res);
+        })
+        .finally(() => setLoading(false));
     }
   };
 
@@ -26,21 +59,42 @@ export const QuestionOne = ({ service }) => {
     <SectionGroup>
       <SectionPanel>
         <form>
-          <input
-            onChange={(e) => search(e.target.value)}
-            type="text"
-            placeholder="Search..."
-          />
+          <h3 className="text-center mb-5">Search Jobs</h3>
+          <div className="form-group">
+            <input
+              type="text"
+              className="form-control"
+              onChange={(e) => search(e.target.value)}
+              id="searchInput"
+              aria-describedby="search"
+              placeholder="Type to search..."
+            />
+          </div>
         </form>
-        <table>
-          {data.map((item) => (
-            <tr>
-              <td>{item.name}</td>
-              <td>{item.start}</td>
-              <td>{item.end}</td>
-            </tr>
-          ))}
-        </table>
+        {loading ? (
+          <TopBarProgress />
+        ) : (
+          <section className="search-results">
+            <div className="results-table mt-0">
+              {data && data.length > 0 && (
+                <div className="record p-3">
+                  <div className="w-10">#</div>
+                  <div className="w-30 header">Name</div>
+                  <div className="w-20 header">Start Date</div>
+                  <div className="w-20 header">End Date</div>
+                  <div className="w-20 header">Contact</div>
+                </div>
+              )}
+              {data.map((item, i) => (
+                <TableItem
+                  no={i + 1}
+                  key={item.name + item.contact && item.contact.id}
+                  item={item}
+                />
+              ))}
+            </div>
+          </section>
+        )}
       </SectionPanel>
     </SectionGroup>
   );
