@@ -35,6 +35,7 @@ const TableItem = ({ item, no }) => (
 export const QuestionOne = ({ service }) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [keyword, setKeyword] = useState('');
 
   const search = (keyword) => {
     if (!keyword) {
@@ -64,7 +65,11 @@ export const QuestionOne = ({ service }) => {
             <input
               type="text"
               className="form-control"
-              onChange={(e) => search(e.target.value)}
+              value={keyword}
+              onChange={(e) => {
+                setKeyword(e.target.value);
+                search(e.target.value);
+              }}
               id="searchInput"
               aria-describedby="search"
               placeholder="Type to search..."
@@ -93,6 +98,9 @@ export const QuestionOne = ({ service }) => {
                 />
               ))}
             </div>
+            {keyword && keyword.length >= 3 && data && data.length === 0 && (
+              <p>No jobs found</p>
+            )}
           </section>
         )}
       </SectionPanel>
