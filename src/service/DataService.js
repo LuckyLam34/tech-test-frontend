@@ -1,19 +1,24 @@
-import ApolloClient from "apollo-boost";
-import gql from "graphql-tag";
-import Axios from "axios";
+import ApolloClient from 'apollo-boost';
+import gql from 'graphql-tag';
+import Axios from 'axios';
 
 const graphClient = new ApolloClient({
-  uri: "http://localhost:3500/graphql",
+  uri: 'http://localhost:3500/graphql',
 });
 
 const axiosClient = Axios.create({
-  baseURL: "http://localhost:3400",
+  baseURL: 'http://localhost:3400',
 });
 
+const get = (endpoint) => {
+  return axiosClient
+    .get(endpoint)
+    .then((result) =>
+      result.data.map((x) => Object.assign({}, x, { id: x.id + '' }))
+    );
+};
+
 export const DataService = {
-  //
-  //  SAMPLE GraphQL Call
-  //
   getJobsWithSearchTerm: (searchTerm) => {
     return graphClient
       .query({
@@ -38,11 +43,22 @@ export const DataService = {
       .then((data) => data.jobs);
   },
 
-  //
-  //  SAMPLE Normal call
-  //
-  // getJobs: () => {
-  //   return axiosClient.get('/jobs')
-  //     .then(result => result.data.map(x => Object.assign({}, x, { id: x.id + '' })))
-  // },
+  getJobs: () => {
+    return get('/jobs');
+  },
+  getResources: () => {
+    return get('/resources');
+  },
+
+  getActivities: () => {
+    return get('/activities');
+  },
+
+  getJobAllocations: () => {
+    return get('/jobAllocations');
+  },
+
+  getActivityAllocations: () => {
+    return get('/activityAllocations');
+  },
 };
