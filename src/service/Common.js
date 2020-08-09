@@ -51,7 +51,7 @@ const bindResourcesWithJobsAndActivities = (
   return resources;
 };
 
-const requestData = async (service) => {
+const fetchData = async (service) => {
   let res, data;
 
   try {
@@ -81,7 +81,7 @@ export const getQuestion2Data = (service) => {
   return new Promise(async (resolve, reject) => {
     let data = [];
 
-    const res = await requestData(service);
+    const res = await fetchData(service);
 
     if (!res) {
       reject({ msg: 'Errors encountered!' });

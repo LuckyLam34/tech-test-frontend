@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 import { SectionGroup } from '../components/section/SectionGroup';
 import { SectionPanel } from '../components/section/SectionPanel';
-
 import TopBarProgress from 'react-topbar-progress-indicator';
 
 import './QuestionOne.scss';

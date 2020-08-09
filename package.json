@@ -15,7 +15,8 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
-    "react-topbar-progress-indicator": "^4.1.0"
+    "react-topbar-progress-indicator": "^4.1.0",
+    "sweetalert": "^2.1.2"
   },
   "scripts": {
     "bootstrap": "yarn install && yarn server:bootstrap",
