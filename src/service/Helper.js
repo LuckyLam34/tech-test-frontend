@@ -1,4 +1,4 @@
-const arrayToObj = (keyName, arr) => {
+export const arrayToObj = (keyName, arr) => {
   const obj = {};
 
   arr.forEach((item) => {
@@ -8,7 +8,7 @@ const arrayToObj = (keyName, arr) => {
   return obj;
 };
 
-const transformToUIDisplayData = (arr) => {
+export const transformToUIDisplayData = (arr) => {
   arr.forEach((item) => {
     item.activities = item.activities.map((activity) => ({
       ...activity,
@@ -20,6 +20,7 @@ const transformToUIDisplayData = (arr) => {
       className: 'custom',
     }));
   });
+  // console.log(arr);
 
   return arr;
 };
@@ -141,7 +142,7 @@ export const getQuestion2Data = (service) => {
   });
 };
 
-const countJobAllocations = (jobs, jobAllocations) => {
+export const countJobAllocations = (jobs, jobAllocations) => {
   const allocatedJobIds = jobAllocations.map((item) => item.jobId);
 
   const data = jobs.map((item) => {
