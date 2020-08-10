@@ -1,0 +1,100 @@
+$sidebarColor: #223048;
+$columnLeftColor: #e4eef1;
+$columnRightColor: #fff;
+$navColor: #3d9bff;
+
+.app__content-blank {
+  height: initial;
+}
+
+.section__panel {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  height: calc(100vh - 102px);
+  overflow: hidden;
+  width: 100%;
+
+  & > * {
+    flex: 1 100%;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 100px;
+    width: 50px;
+    height: 100%;
+    background-color: $sidebarColor;
+
+    .menu {
+      position: relative;
+      height: 100%;
+
+      & > .item {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #c4c4c4;
+        margin: 12px 4px 0px;
+
+        &:last-child {
+          position: absolute;
+          bottom: 15vh;
+        }
+      }
+    }
+  }
+
+  .column-left {
+    flex: 1;
+    margin-left: 50px;
+    background-color: $columnLeftColor;
+
+    & > .card {
+      background-color: $columnRightColor;
+    }
+  }
+
+  .column-right {
+    flex: 2;
+    background-color: $columnRightColor;
+
+    & > .card {
+      background-color: $columnLeftColor;
+    }
+  }
+
+  .column-left,
+  .column-right {
+    padding: 1rem;
+    height: 100%;
+    overflow-y: auto;
+  }
+
+  .card {
+    margin-bottom: 1rem;
+    width: 100%;
+    height: 100px;
+  }
+
+  nav {
+    background-color: $navColor;
+    height: 76px;
+    width: 100%;
+    margin-left: 50px;
+    padding-left: 1rem;
+    justify-content: flex-start;
+    padding: 22px;
+
+    & > a {
+      text-decoration: none;
+      color: #fff;
+      padding-right: 1rem;
+      font-size: 20px;
+    }
+  }
+}
