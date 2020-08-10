@@ -71,6 +71,7 @@ const ColumnLeft = ({ service }) => {
       {items.map((item, i) => (
         <Card key={item.id} {...item} no={i + 1} />
       ))}
+      <div></div>
     </div>
   );
 };
@@ -86,6 +87,7 @@ const ColumnRight = () => (
     <Card />
     <Card />
     <Card />
+    <div></div>
   </div>
 );
 

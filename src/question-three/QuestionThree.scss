@@ -76,6 +76,14 @@ $countColor: #3d9bff;
     padding: 1rem;
     height: 100%;
     overflow-y: auto;
+
+    & > div:last-child {
+      height: 50px;
+    }
+
+    & > :nth-last-child(2) {
+      margin-bottom: 1.5rem;
+    }
   }
 
   .card {
