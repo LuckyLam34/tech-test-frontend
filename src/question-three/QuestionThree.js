@@ -67,12 +67,18 @@ const ColumnLeft = ({ service }) => {
       .finally(() => setLoading(false));
   }, []);
   return (
-    <div className="column-left">
-      {items.map((item, i) => (
-        <Card key={item.id} {...item} no={i + 1} />
-      ))}
-      <div></div>
-    </div>
+    <>
+      {loading ? (
+        <TopBarProgress />
+      ) : (
+        <div className="column-left">
+          {items.map((item, i) => (
+            <Card key={item.id} {...item} no={i + 1} />
+          ))}
+          <div></div>
+        </div>
+      )}
+    </>
   );
 };
 
