@@ -91,18 +91,20 @@ const ColumnRight = () => (
   </div>
 );
 
+const Wrapper = ({ children }) => <div className="wrapper">{children}</div>;
+
 export const QuestionThree = (props) => {
   const headerItems = ['Home', 'About', 'Jobs', 'Contact'];
 
   return (
     <SectionGroup>
       <SectionPanel>
-        <div className="wrapper">
+        <Wrapper>
           <SideBar />
           <Header headerItems={headerItems} />
           <ColumnLeft {...props} />
           <ColumnRight />
-        </div>
+        </Wrapper>
       </SectionPanel>
     </SectionGroup>
   );
