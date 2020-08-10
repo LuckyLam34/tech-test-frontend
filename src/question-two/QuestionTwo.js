@@ -4,7 +4,7 @@ import { SectionGroup } from '../components/section/SectionGroup';
 import { SectionPanel } from '../components/section/SectionPanel';
 import { Swimlane } from '../components/swimlane/Swimlane';
 import TopBarProgress from 'react-topbar-progress-indicator';
-import { getQuestion2Data } from '../service/Common';
+import { getQuestion2Data } from '../service/Helper';
 import swal from 'sweetalert';
 
 import './QuestionTwo.css';
@@ -22,18 +22,18 @@ export const QuestionTwo = ({ service }) => {
   useEffect(() => {
     setLoading(true);
 
-    getQuestion2Data(service).then(
-      (data) => {
-        setItems(data);
-        setLoading(false);
-      },
-      (err) => {
-        swal('Error!', err.msg, 'error', {
-          button: false,
-        });
-        setLoading(false);
-      }
-    );
+    getQuestion2Data(service)
+      .then(
+        (data) => {
+          setItems(data);
+        },
+        (err) => {
+          swal('Error!', err.msg, 'error', {
+            button: false,
+          });
+        }
+      )
+      .finally(() => setLoading(false));
   }, []);
 
   return (
